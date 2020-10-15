@@ -1,44 +1,115 @@
 body{
-  background-color: #9296ff;
+  background-color: #0a0e7c;
 }
 
-.App {
+.list-container {
   background-color: #3f3160;
   min-height: 500px;
   width: 400px;
-  margin: 40px auto;
+  margin: 0px auto;
+  display: grid;
+  grid-template-rows: auto;
   border-radius: 10px;
+}
+
+.center{
+display: block;
+margin-top: 75px;
+margin-right: auto;
+padding-right: 75px;
+margin-left: auto;
+border-radius: 20px;
+width: 330px;
+background-color: #3f3160;
 }
 
 
 #to-do-form input{
   background-color: rgb(27, 112, 137);
-  border: 0;
+  border: 0px;
   width: 200px;
   height: 50px;
-  padding: 0 20px;
+  padding: 0 30px;
   margin: 20px;
   font-size: 18px;
-  border-radius: 10px;
+  border-radius: 10px; 
   color: white;
 }
-
-
-#to-do-form input::placeholder{
-color: white;
-}
-#to-do-form input:focus, button:focus{
-  outline: none;
-  }
-
 #to-do-form button {
   height: 50px;
-  width: 80px;
+  width: 70px;
   border-radius: 10px;
   background-color: rgb(202, 156, 24);
   color: white;
   cursor: pointer;
   font-weight: bolder;
+  position: fixed;
+  margin: 20px 0px 0px 20px;
+}
+#to-do-form input::placeholder{
+color: white;
+}
 
+#to-do-form input:focus, button:focus{
+  outline: none;
+  }
+
+
+
+.list{
+  color: white;
+  width: 350px;
+  height: 50px;
+  margin: 20px auto;
+  
+}
+
+
+.list p{
+  padding:10px;
+  background-color: #bf07ac;
+  border-radius: 10px;
+  position: relative;
+}
+
+#drag{
+  background-color: transparent;
+  color: transparent;
+  text-decoration: transparent;
+  cursor: grabbing;
+}
+#drag input{
+  cursor: grabbing;
+  color:transparent;
+}
+
+.list p span{
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+
+.list p input{
+  background-color: transparent;
+  border: 0;
+  color: white;
+  font-size: 18px;
+}
+
+.list p input:focus{
+  outline: none;
+}
+
+.test{
+  background-color: transparent;
+}
+
+
+
+
+#faicons{
+  margin: 0 5px;
+  font-size: 15px;
 }
 

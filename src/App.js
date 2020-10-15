@@ -20,7 +20,7 @@ constructor(props){
   this.handleInput = this.handleInput.bind(this);
   this.addItem = this.addItem.bind(this);
   this.deleteItem = this.deleteItem.bind(this);
-  this.setUpdate = this.setUpdate.bind(this);
+  this.setUpdateItem = this.setUpdateItem.bind(this);
 }
 
 handleInput(e){
@@ -36,7 +36,6 @@ handleInput(e){
 addItem(e){
   e.preventDefault();
   const newItem = this.state.currentItem;
-  console.log(newItem);
   if(newItem.text!==""){
     const newItems = [...this.state.items, newItem];
     this.setState({
@@ -48,13 +47,18 @@ addItem(e){
     })
   }
 }
+
+
 deleteItem(key){
   const filterItems = this.state.items.filter(item => item.key!==key);
     this.setState({
       items:filterItems
     })
   }
-  setUpdate(text,key){
+
+
+
+setUpdateItem(text,key){
     const items = this.state.items;
     items.map(item => {
       if(item.key===key){
@@ -67,11 +71,13 @@ deleteItem(key){
   }
 
 
+
+
 render(){
   return (
-    <div className="App">
+    <div>
       <header>
-      <form id="to-do-form">
+      <form id="to-do-form" className="center">
         <input type="text" placeholder="Enter Text"
         value={this.state.currentItem.text}
         onChange={this.handleInput}/>
@@ -80,9 +86,13 @@ render(){
         >Add</button>
       </form> 
     </header>
+
+
+    <div className="list-container">
     <ListItems items = {this.state.items}
     deleteItem = {this.deleteItem}
-    setUpdate = {this.setUpdate}></ListItems>
+    setUpdateItem = {this.setUpdateItem}></ListItems>
+    </div>
     </div>
   );
 }
