@@ -7,8 +7,6 @@ const [dragging,setDragging]= useState(false);
 const dragItem = useRef();
 const dragNode = useRef(); 
 const list = props.items;
-
-
 function getIndex(value, list, prop) {
     for(var i = 0; i < list.length; i++) {
         if(list[i][prop] === value) {
@@ -17,6 +15,7 @@ function getIndex(value, list, prop) {
     }
     return -1;
 }
+
 const handleDragStart = (e ,params) => {
         dragItem.current = params;
         dragNode.current = e.target;
@@ -25,7 +24,6 @@ const handleDragStart = (e ,params) => {
             setDragging(true)
         },0) 
     }
-
 
 const handleDragEnd = () => {
         setDragging(false);
@@ -45,10 +43,16 @@ const handleDragEnter = (e,item) => {
         }
     }
 
-const getStyles=(params)=>{
+const getDragStyle=(params)=>{
         const currentItem = dragItem.current.item;
         if(currentItem.key===params.item.key){
             return 'drag'
+        }
+        return ''
+    }
+const getCompleteStyle=(params)=>{
+        if(params.item.completed){
+            return {backgroundColor:'green'}
         }
         return ''
     }
@@ -59,23 +63,39 @@ const getStyles=(params)=>{
         {
             return <div className = "list" key = {item.key}>
                 <p draggable 
-                
+                style={item.completed?getCompleteStyle({item}):null}
                 onDragStart={(e)=>{handleDragStart(e,{item})}}
                 onDragEnter = {dragging? (e)=>{handleDragEnter(e,item)}:null}
-                id={dragging?getStyles({item}):null}
+                id={dragging?getDragStyle({item}):null}
                 >
-                    <input 
+                <input 
                     id = {item.key} 
                     value={item.text}
-                    onChange={
-                        (e) =>  {props.setUpdateItem(e.target.value, item.key)}} /> <span>
-                <FontAwesomeIcon className='faicons' icon='trash'
+                    onChange={(e) =>  
+                        {props.setUpdateItem(e.target.value, item.key)}} 
+                />
+                <span>
+
+                <FontAwesomeIcon className="faicons-grabbing" icon='arrows-alt'
+                />
+
+
+                {!item.completed
+                ? <FontAwesomeIcon className="faicons" icon='check'
+                onClick={() => props.setCompletedItem(item.key)}/>
+                : <FontAwesomeIcon className="faicons" icon='reply'
+                onClick={() => props.setUncompletedItem(item.key)}
+                />}
+
+
+
+
+                <FontAwesomeIcon className="faicons" icon='trash'
                 onClick={() => props.deleteItem(item.key)}
                 />
                 </span>
                 </p>
                 
-               
             </div>
 
         })

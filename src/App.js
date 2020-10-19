@@ -3,9 +3,10 @@ import logo from './logo.svg';
 import './App.css';
 import ListItems from './ListItems.js';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {faTrash} from '@fortawesome/free-solid-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faTrash)
+
+library.add(fas)
 
 class App extends React.Component{
 constructor(props){
@@ -14,20 +15,24 @@ constructor(props){
     items:[],
     currentItem:{
     text:'',
-    key:''
+    key:'',
+    completed:false
     }
   }
   this.handleInput = this.handleInput.bind(this);
   this.addItem = this.addItem.bind(this);
   this.deleteItem = this.deleteItem.bind(this);
   this.setUpdateItem = this.setUpdateItem.bind(this);
+  this.setCompletedItem=this.setCompletedItem.bind(this);
+  this.setUncompletedItem=this.setUncompletedItem.bind(this);
 }
 
 handleInput(e){
   this.setState({
     currentItem:{
       text: e.target.value,
-      key:Date.now() 
+      key:Date.now(),
+      completed:false
     }
   })
 }
@@ -42,7 +47,8 @@ addItem(e){
       items:newItems,
       currentItem:{
         text:'',
-        key:''
+        key:'',
+        completed:''
       }
     })
   }
@@ -70,6 +76,28 @@ setUpdateItem(text,key){
     })
   }
 
+setCompletedItem(key){
+    const items = this.state.items;
+    items.map(item => {
+      if(item.key===key){
+        item.completed=true;
+      }
+    })
+    this.setState({
+      items: items
+    })
+  }
+  setUncompletedItem(key){
+    const items = this.state.items;
+    items.map(item => {
+      if(item.key===key){
+        item.completed=false;
+      }
+    })
+    this.setState({
+      items: items
+    })
+  }
 
 
 
@@ -91,7 +119,9 @@ render(){
     <div className="list-container">
     <ListItems items = {this.state.items}
     deleteItem = {this.deleteItem}
-    setUpdateItem = {this.setUpdateItem}></ListItems>
+    setUpdateItem = {this.setUpdateItem}
+    setCompletedItem= {this.setCompletedItem}
+    setUncompletedItem={this.setUncompletedItem}></ListItems>
     </div>
     </div>
   );

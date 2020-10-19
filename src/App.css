@@ -83,6 +83,17 @@ color: white;
   color:transparent;
 }
 
+
+
+#completed{
+  background-color: green;
+  color: white;
+  cursor: grabbing;
+}
+#completed input{
+  color:white;
+}
+
 .list p span{
   position: absolute;
   right: 10px;
@@ -108,8 +119,19 @@ color: white;
 
 
 
-#faicons{
+
+
+
+
+
+.faicons{
   margin: 0 5px;
   font-size: 15px;
 }
+.faicons-grabbing {
+  margin: 0 5px;
+  font-size: 15px;
+  cursor: grabbing;
+}
+
 
